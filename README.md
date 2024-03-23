@@ -16,7 +16,7 @@
 ---
 
 - **STACK :**
-  - **UNITY PARKOUR CLIMBING SYSTEM** : `0.2.0`
+  - **UNITY PARKOUR CLIMBING SYSTEM** : `0.3.0`
   - **UNITY** : `2022.3.20f1`
 
 ---

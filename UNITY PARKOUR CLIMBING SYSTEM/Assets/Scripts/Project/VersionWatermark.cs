@@ -22,7 +22,7 @@ public class VersionWatermark : MonoBehaviour
 
     private void SetVersionWatermark()
     {
-        waterwarkText.SetText("v0.2.0");
+        waterwarkText.SetText("v0.3.0");
         waterwarkText.fontStyle = FontStyles.Bold;
         waterwarkText.color = new Color(1f, 1f, 1f, 0.4f);
         waterwarkText.alignment = TextAlignmentOptions.BottomRight;

@@ -714,6 +714,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Version Watermark
       objectReference: {fileID: 0}
+    - target: {fileID: 8993677680886869835, guid: 5ea54b00d5f5fbb4f96e89e67523f100,
+        type: 3}
+      propertyPath: show
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

@@ -5,6 +5,8 @@ public class VersionWatermark : MonoBehaviour
 {
     private TMP_Text waterwarkText;
 
+    public bool show;
+
     private void Awake()
     {
         InitializeComponents();
@@ -22,9 +24,17 @@ public class VersionWatermark : MonoBehaviour
 
     private void SetVersionWatermark()
     {
-        waterwarkText.SetText("v0.3.0");
+        waterwarkText.SetText(GetVersionText());
         waterwarkText.fontStyle = FontStyles.Bold;
         waterwarkText.color = new Color(1f, 1f, 1f, 0.4f);
         waterwarkText.alignment = TextAlignmentOptions.BottomRight;
+    }
+
+    private string GetVersionText()
+    {
+        if (show)
+            return Alias.GetProjectVersion();
+        else
+            return "";
     }
 }

@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Diagnostics;
-using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -18,7 +17,7 @@ public class GameController : MonoBehaviour
 
     private void StartingGame()
     {
-        ConsoleLog("Starting " + SceneManager.GetActiveScene().name + "...");
+        ConsoleLog("Starting Game...");
     }
 
     private void LockCursor()
@@ -51,12 +50,11 @@ public class GameController : MonoBehaviour
 
     private void Update()
     {
-        DeveloperMode();
-        ScenesManagement();
+        UpdateDeveloperMode();
         ExitGame();
     }
 
-    private void DeveloperMode()
+    private void UpdateDeveloperMode()
     {
         if (Input.GetKeyDown(KeyCode.Keypad0))
         {
@@ -65,37 +63,6 @@ public class GameController : MonoBehaviour
             else
                 DisableDeveloperMode();
         }
-    }
-
-    private void ScenesManagement()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            switch (SceneManager.GetActiveScene().buildIndex)
-            {
-                case 0:
-                    LoadTestScene();
-                    break;
-                case 1:
-                    LoadMainScene();
-                    break;
-                default:
-                    ConsoleLog("Active Scene Not Expected");
-                    break;
-            }
-        }
-    }
-
-    private void LoadMainScene()
-    {
-        ConsoleLog("Loading Main Scene...");
-        SceneManager.LoadScene("Main Scene");
-    }
-
-    private void LoadTestScene()
-    {
-        ConsoleLog("Loading Test Scene...");
-        SceneManager.LoadScene("Test Scene");
     }
 
     private void ExitGame()

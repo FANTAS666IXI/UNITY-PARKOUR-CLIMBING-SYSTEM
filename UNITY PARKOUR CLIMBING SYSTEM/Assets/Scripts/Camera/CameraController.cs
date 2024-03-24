@@ -1,27 +1,25 @@
-using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
     [SerializeField] Transform followTarget;
-    [SerializeField] float rotationSpeed;
-    [SerializeField] bool invertX;
-    [SerializeField] bool invertY;
+    [SerializeField] int distanceUnits;
     [SerializeField] int minDistanceUnits;
     [SerializeField] int maxDistanceUnits;
+    [SerializeField] float rotationSpeed;
     [SerializeField] float minVerticalAngle;
     [SerializeField] float maxVerticalAngle;
+    [SerializeField] bool invertX;
+    [SerializeField] bool invertY;
     [SerializeField] Vector2 framingOffSet;
 
     private float invertXVal;
     private float invertYVal;
-    private int distanceUnits;
-    private Vector3 targetDistance;
     private float rotationX;
     private float rotationY;
-    private Quaternion targetRotation;
+    private Vector3 targetDistance;
     private Vector3 targetFocus;
+    private Quaternion targetRotation;
 
     public Color classColor;
     public bool consoleLog;
@@ -40,14 +38,13 @@ public class CameraController : MonoBehaviour
     private void Start()
     {
         InitializeVariables();
+        ConsoleLogCameraDistance();
     }
 
     private void InitializeVariables()
     {
-        distanceUnits = 6;
         invertXVal = (invertX) ? -1 : 1;
         invertYVal = (invertY) ? -1 : 1;
-        ConsoleLog("Initial Camera Distance = " + distanceUnits + " Units.");
     }
 
     private void Update()
@@ -60,20 +57,20 @@ public class CameraController : MonoBehaviour
 
     private void UpdateTargetDistance()
     {
-        if (Input.GetKeyDown(KeyCode.KeypadPlus))
+        if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             if (distanceUnits > minDistanceUnits)
             {
                 distanceUnits--;
-                ConsoleLog("Current Camera Distance = " + distanceUnits + " Units.");
+                ConsoleLogCameraDistance();
             }
         }
         else
         {
-            if (Input.GetKeyDown(KeyCode.KeypadMinus) & distanceUnits < maxDistanceUnits)
+            if (Input.GetKeyDown(KeyCode.DownArrow) & distanceUnits < maxDistanceUnits)
             {
                 distanceUnits++;
-                ConsoleLog("Current Camera Distance = " + distanceUnits + " Units.");
+                ConsoleLogCameraDistance();
             }
         }
         targetDistance = new Vector3(0, 0, distanceUnits);
@@ -96,6 +93,13 @@ public class CameraController : MonoBehaviour
     private void UpdateTargetOrientation()
     {
         transform.rotation = targetRotation;
+    }
+
+    public Quaternion PlanarRotation => Quaternion.Euler(0, rotationY, 0);
+
+    private void ConsoleLogCameraDistance()
+    {
+        ConsoleLog("Current Camera Distance = " + distanceUnits + " Units.");
     }
 
     private void ConsoleLog(string message)

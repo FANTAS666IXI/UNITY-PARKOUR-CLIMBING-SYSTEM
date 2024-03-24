@@ -10,13 +10,15 @@
 
 - **CONTROLS :**
   - **Swap Scenes : `Space`**
+  - **Zoom In : `Numeric Keypad +`**
+  - **Zoom Out : `Numeric Keypad -`**
   - **Exit Game : `Escape`**
   - **Developer Mode : `Numeric Keypad 0`**
 
 ---
 
 - **STACK :**
-  - **UNITY PARKOUR CLIMBING SYSTEM** : `0.3.1`
+  - **UNITY PARKOUR CLIMBING SYSTEM** : `0.4.0`
   - **UNITY** : `2022.3.20f1`
 
 ---

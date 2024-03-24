@@ -13,14 +13,23 @@ public class GameController : MonoBehaviour
     private void Awake()
     {
         StartingGame();
-        InitializeVariables();
         LockCursor();
     }
 
     private void StartingGame()
     {
-        ConsoleLog("Starting Game...");
-        ConsoleLog("Starting Main Scene.");
+        ConsoleLog("Starting " + SceneManager.GetActiveScene().name + "...");
+    }
+
+    private void LockCursor()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
+
+    private void Start()
+    {
+        InitializeVariables();
     }
 
     private void InitializeVariables()
@@ -36,14 +45,8 @@ public class GameController : MonoBehaviour
 
     private void DisableDeveloperMode()
     {
-        developerMode = true;
+        developerMode = false;
         ConsoleLog("Developer Mode Disabled.");
-    }
-
-    private void LockCursor()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
     }
 
     private void Update()
@@ -68,9 +71,31 @@ public class GameController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            ConsoleLog("Loading Test Scene...");
-            SceneManager.LoadScene("Test Scene");
+            switch (SceneManager.GetActiveScene().buildIndex)
+            {
+                case 0:
+                    LoadTestScene();
+                    break;
+                case 1:
+                    LoadMainScene();
+                    break;
+                default:
+                    ConsoleLog("Active Scene Not Expected");
+                    break;
+            }
         }
+    }
+
+    private void LoadMainScene()
+    {
+        ConsoleLog("Loading Main Scene...");
+        SceneManager.LoadScene("Main Scene");
+    }
+
+    private void LoadTestScene()
+    {
+        ConsoleLog("Loading Test Scene...");
+        SceneManager.LoadScene("Test Scene");
     }
 
     private void ExitGame()

@@ -20,12 +20,12 @@
   - **Decrease Volume : `Keypad Minus`**
   - **Mute Audio : `Keypad Multiply`**
   - **Exit Game : `Escape`**
-  - **Developer Mode : `Numeric Keypad 0`**
+  - **Developer Mode : `Keypad 0`**
 
 ---
 
 - **STACK :**
-  - **UNITY PARKOUR CLIMBING SYSTEM** : `0.5.0`
+  - **UNITY PARKOUR CLIMBING SYSTEM** : `0.6.0`
   - **UNITY** : `2022.3.20f1`
 
 ---

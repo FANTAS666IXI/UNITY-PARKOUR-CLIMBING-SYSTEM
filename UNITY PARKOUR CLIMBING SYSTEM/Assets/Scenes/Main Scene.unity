@@ -417,6 +417,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1207596847}
   - component: {fileID: 1207596848}
+  - component: {fileID: 1207596849}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -452,11 +453,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79a24e4ba0f9697428adc4dd19c55cd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 5
+  moveSpeed: 3
   runSpeed: 10
   rotationSpeed: 600
   classColor: {r: 0.8666667, g: 0, b: 0, a: 1}
   consoleLog: 1
+--- !u!95 &1207596849
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1207596846}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 6653a1b52c08bff4ab081f13f4112cc8, type: 3}
+  m_Controller: {fileID: 9100000, guid: 9c03a5aafa0c07541a2965f217757693, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1213153482
 GameObject:
   m_ObjectHideFlags: 0
@@ -931,7 +953,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: db7b20d0713002349b636ec18029a2c2, type: 2}
+  - {fileID: 2100000, guid: cc33bd0498239b145bcba61a81581b6f, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

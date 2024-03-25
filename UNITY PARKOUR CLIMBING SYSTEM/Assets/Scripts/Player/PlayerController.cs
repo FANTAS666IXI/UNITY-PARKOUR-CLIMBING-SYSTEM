@@ -8,13 +8,14 @@ public class PlayerController : MonoBehaviour
 
     private float horizontalInput;
     private float verticalInput;
-    private float movingAmount;
+    private float moveAmount;
     private bool isMoving;
     private bool isRuning;
     private Vector3 moveInput;
     private Vector3 moveDir;
     private Quaternion targetRotation;
     private CameraController cameraController;
+    private Animator animator;
 
     public Color classColor;
     public bool consoleLog;
@@ -28,6 +29,7 @@ public class PlayerController : MonoBehaviour
     private void InitializeReferences()
     {
         cameraController = Camera.main.GetComponent<CameraController>();
+        animator = GetComponent<Animator>();
         gameController = FindObjectOfType<GameController>();
     }
 
@@ -38,6 +40,7 @@ public class PlayerController : MonoBehaviour
         if (isMoving)
             MovePlayer();
         RotatePlayer();
+        UpdateMoveAnimations();
     }
 
     private void UpdateIsRuning()
@@ -59,8 +62,8 @@ public class PlayerController : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
         moveInput = (new Vector3(horizontalInput, 0, verticalInput)).normalized;
-        movingAmount = Mathf.Abs(horizontalInput) + Mathf.Abs(verticalInput);
-        isMoving = (0 < movingAmount);
+        moveAmount = Mathf.Clamp01(Mathf.Abs(horizontalInput) + Mathf.Abs(verticalInput));
+        isMoving = (0 < moveAmount);
         moveDir = cameraController.PlanarRotation * moveInput;
     }
 
@@ -71,12 +74,24 @@ public class PlayerController : MonoBehaviour
         else
             transform.position += moveSpeed * Time.deltaTime * moveDir;
         targetRotation = Quaternion.LookRotation(moveDir);
-        ConsoleLog("Player Moves");
+        ConsoleLog("Player Moves.");
     }
 
     private void RotatePlayer()
     {
         transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+    }
+
+    private void UpdateMoveAnimations()
+    {
+        if (isMoving)
+        {
+            if (isRuning)
+                moveAmount = Mathf.Clamp(moveAmount, 0.2f, 1);
+            else
+                moveAmount = Mathf.Clamp(moveAmount, 0, 0.2f);
+        }
+        animator.SetFloat("moveAmount", moveAmount, 0.2f, Time.deltaTime);
     }
 
     private void ConsoleLog(string message)

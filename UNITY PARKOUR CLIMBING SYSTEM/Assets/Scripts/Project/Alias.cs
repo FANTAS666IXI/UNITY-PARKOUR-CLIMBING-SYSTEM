@@ -1,6 +1,6 @@
 public static class Alias
 {
-    private const string projectVersion = "v0.7.0";
+    private const string projectVersion = "v0.8.0";
 
     public static string GetProjectVersion()
     {

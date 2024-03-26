@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
+    [Header("Camera Settings")]
     [SerializeField] Transform followTarget;
     [SerializeField] int distanceUnits;
     [SerializeField] int minDistanceUnits;
@@ -12,6 +13,10 @@ public class CameraController : MonoBehaviour
     [SerializeField] bool invertX;
     [SerializeField] bool invertY;
     [SerializeField] Vector2 framingOffSet;
+    [Header("Console Log Settings")]
+    public Color classColor;
+    public bool consoleLog;
+    private GameController gameController;
 
     private float invertXVal;
     private float invertYVal;
@@ -20,10 +25,6 @@ public class CameraController : MonoBehaviour
     private Vector3 targetDistance;
     private Vector3 targetFocus;
     private Quaternion targetRotation;
-
-    public Color classColor;
-    public bool consoleLog;
-    private GameController gameController;
 
     private void Awake()
     {
@@ -102,9 +103,9 @@ public class CameraController : MonoBehaviour
         ConsoleLog("Current Camera Distance = " + distanceUnits + " Units.");
     }
 
-    private void ConsoleLog(string message)
+    private void ConsoleLog(string message, bool showFrame = false, int infoLevel = 0)
     {
         if (consoleLog)
-            gameController.ConsoleLogSystem($"{message}", classColor);
+            gameController.ConsoleLogSystem($"{message}", classColor, showFrame, infoLevel);
     }
 }

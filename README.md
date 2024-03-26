@@ -13,19 +13,19 @@
   - **Move Left : `A`**
   - **Move Back : `S`**
   - **Move Right : `D`**
-  - **Run : `Left Shift`**
-  - **Zoom In : `Up Arrow`**
-  - **Zoom Out : `Down Arrow`**
-  - **Increase Volume : `Keypad Plus`**
-  - **Decrease Volume : `Keypad Minus`**
-  - **Mute Audio : `Keypad Multiply`**
-  - **Exit Game : `Escape`**
-  - **Developer Mode : `Keypad 0`**
+  - **Run : `LEFT SHIFT`**
+  - **Zoom In : `UP ARROW`**
+  - **Zoom Out : `DOWN ARROW`**
+  - **Increase Volume : `KEYPAD PLUS / F3`**
+  - **Decrease Volume : `KEYPAD MINUS / F1`**
+  - **Mute Audio : `KEYPAD MULTIPLY / F2`**
+  - **Exit Game : `ESCAPE`**
+  - **Developer Mode : `KEYPAD 0 / F12`**
 
 ---
 
 - **STACK :**
-  - **UNITY PARKOUR CLIMBING SYSTEM** : `0.7.0`
+  - **UNITY PARKOUR CLIMBING SYSTEM** : `0.8.0`
   - **UNITY** : `2022.3.20f1`
 
 ---

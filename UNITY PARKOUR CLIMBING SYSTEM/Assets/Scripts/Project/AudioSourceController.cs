@@ -2,18 +2,19 @@ using UnityEngine;
 
 public class AudioSourceController : MonoBehaviour
 {
+    [Header("Audio Source Settings")]
     public int volume;
     public int volumeModifier;
     public int minVolume;
     public int maxVolume;
     public bool muted;
-
-    private float trueVolume;
-    private AudioSource audioSource;
-
+    [Header("Console Log Settings")]
     public Color classColor;
     public bool consoleLog;
     private GameController gameController;
+
+    private float trueVolume;
+    private AudioSource audioSource;
 
     private void Awake()
     {
@@ -61,7 +62,7 @@ public class AudioSourceController : MonoBehaviour
 
     private void CheckIncreaseVolume()
     {
-        if (Input.GetKeyDown(KeyCode.KeypadPlus))
+        if (Input.GetKeyDown(KeyCode.KeypadPlus) || Input.GetKeyDown(KeyCode.F3))
         {
             muted = false;
             volume += volumeModifier;
@@ -71,7 +72,7 @@ public class AudioSourceController : MonoBehaviour
 
     private void CheckDecreaseVolume()
     {
-        if (Input.GetKeyDown(KeyCode.KeypadMinus))
+        if (Input.GetKeyDown(KeyCode.KeypadMinus) || Input.GetKeyDown(KeyCode.F1))
         {
             volume -= volumeModifier;
             SetVolume();
@@ -80,16 +81,16 @@ public class AudioSourceController : MonoBehaviour
 
     private void CheckMuteVolume()
     {
-        if (Input.GetKeyDown(KeyCode.KeypadMultiply))
+        if (Input.GetKeyDown(KeyCode.KeypadMultiply) || Input.GetKeyDown(KeyCode.F2))
         {
             muted = !muted;
             SetVolume();
         }
     }
 
-    private void ConsoleLog(string message)
+    private void ConsoleLog(string message, bool showFrame = false, int infoLevel = 0)
     {
         if (consoleLog)
-            gameController.ConsoleLogSystem($"{message}", classColor);
+            gameController.ConsoleLogSystem($"{message}", classColor, showFrame, infoLevel);
     }
 }

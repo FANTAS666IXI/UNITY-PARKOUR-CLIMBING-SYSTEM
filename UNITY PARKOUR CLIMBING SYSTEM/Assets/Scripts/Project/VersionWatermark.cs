@@ -3,9 +3,10 @@ using UnityEngine;
 
 public class VersionWatermark : MonoBehaviour
 {
-    private TMP_Text waterwarkText;
-
+    [Header("Version Watermark Settings")]
     public bool show;
+
+    private TMP_Text waterwarkText;
 
     private void Awake()
     {

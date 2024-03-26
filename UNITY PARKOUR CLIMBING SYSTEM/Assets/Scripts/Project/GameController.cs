@@ -3,16 +3,17 @@ using System.Diagnostics;
 
 public class GameController : MonoBehaviour
 {
+    [Header("Game Controller Settings")]
     public bool developerMode;
     public Material defaultMaterial;
     public Material developerMaterial;
-
-    private PlayerController player;
-    private Renderer ground;
-
+    [Header("Console Log Settings")]
     public Color classColor;
     public bool consoleLog;
     public bool consoleLogSystem;
+
+    private PlayerController player;
+    private Renderer ground;
 
     private void Awake()
     {
@@ -23,7 +24,7 @@ public class GameController : MonoBehaviour
 
     private void StartingGame()
     {
-        ConsoleLog("Starting Game...");
+        ConsoleLog("Starting Game...", true);
     }
 
     private void InitializeReferences()
@@ -77,7 +78,7 @@ public class GameController : MonoBehaviour
 
     private void UpdateDeveloperMode()
     {
-        if (Input.GetKeyDown(KeyCode.Keypad0))
+        if (Input.GetKeyDown(KeyCode.Keypad0) || Input.GetKeyDown(KeyCode.F12))
         {
             if (developerMode)
                 DisableDeveloperMode();
@@ -90,26 +91,46 @@ public class GameController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            ConsoleLog("Closing Game...");
+            ConsoleLog("Closing Game...", true);
             Application.Quit();
         }
     }
 
-    private void ConsoleLog(string message)
+    private void ConsoleLog(string message, bool showFrame = false, int infoLevel = 0)
     {
         if (consoleLog)
-            ConsoleLogSystem($"{message}", classColor);
+            ConsoleLogSystem($"{message}", classColor, showFrame, infoLevel);
     }
 
-    public void ConsoleLogSystem(string message, Color classColor, int frame = 1)
+    public void ConsoleLogSystem(string message, Color classColor, bool showFrame, int infoLevel, int traceFrame = 1)
     {
         if (consoleLogSystem)
         {
             StackTrace stackTrace = new();
-            StackFrame stackFrame = stackTrace.GetFrame(frame);
+            StackFrame stackFrame = stackTrace.GetFrame(traceFrame);
             string callingScript = stackFrame.GetMethod().DeclaringType.Name;
             string stringClassColor = ("#" + ColorUtility.ToHtmlStringRGBA(classColor));
-            UnityEngine.Debug.Log($"<b>[<color={stringClassColor}>{callingScript}</color>]: {message}</b>");
+            switch (infoLevel)
+            {
+                case 0:
+                    if (showFrame)
+                        UnityEngine.Debug.Log($"<b>[<color={stringClassColor}>{callingScript}</color>]: (FRM: {Time.frameCount}) {message}</b>");
+                    else
+                        UnityEngine.Debug.Log($"<b>[<color={stringClassColor}>{callingScript}</color>]: {message}</b>");
+                    break;
+                case 1:
+                    if (showFrame)
+                        UnityEngine.Debug.LogWarning($"<b>[<color={stringClassColor}>{callingScript}</color>]: (FRM: {Time.frameCount}) {message}</b>");
+                    else
+                        UnityEngine.Debug.LogWarning($"<b>[<color={stringClassColor}>{callingScript}</color>]: {message}</b>");
+                    break;
+                case 2:
+                    if (showFrame)
+                        UnityEngine.Debug.LogError($"<b>[<color={stringClassColor}>{callingScript}</color>]: (FRM: {Time.frameCount}) {message}</b>");
+                    else
+                        UnityEngine.Debug.LogError($"<b>[<color={stringClassColor}>{callingScript}</color>]: {message}</b>");
+                    break;
+            }
         }
     }
 }

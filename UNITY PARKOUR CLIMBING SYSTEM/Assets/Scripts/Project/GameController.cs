@@ -3,7 +3,12 @@ using System.Diagnostics;
 
 public class GameController : MonoBehaviour
 {
-    private bool developerMode;
+    public bool developerMode;
+    public Material defaultMaterial;
+    public Material developerMaterial;
+
+    private PlayerController player;
+    private Renderer ground;
 
     public Color classColor;
     public bool consoleLog;
@@ -12,12 +17,19 @@ public class GameController : MonoBehaviour
     private void Awake()
     {
         StartingGame();
+        InitializeReferences();
         LockCursor();
     }
 
     private void StartingGame()
     {
         ConsoleLog("Starting Game...");
+    }
+
+    private void InitializeReferences()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>();
+        ground = GameObject.Find("Ground").GetComponent<Renderer>();
     }
 
     private void LockCursor()
@@ -28,23 +40,32 @@ public class GameController : MonoBehaviour
 
     private void Start()
     {
-        InitializeVariables();
+        InitializeDeveloperMode();
     }
 
-    private void InitializeVariables()
+    private void InitializeDeveloperMode()
     {
-        EnableDeveloperMode();
+        if (developerMode)
+            EnableDeveloperMode();
+        else
+            DisableDeveloperMode();
     }
 
     private void EnableDeveloperMode()
     {
         developerMode = true;
+        player.SetCurrentWalkSpeed(player.GetWalkSpeed() * 5);
+        player.SetCurrentRunSpeed(player.GetRunSpeed() * 5);
+        ground.material = developerMaterial;
         ConsoleLog("Developer Mode Enabled.");
     }
 
     private void DisableDeveloperMode()
     {
         developerMode = false;
+        player.SetCurrentWalkSpeed(player.GetWalkSpeed());
+        player.SetCurrentRunSpeed(player.GetRunSpeed());
+        ground.material = defaultMaterial;
         ConsoleLog("Developer Mode Disabled.");
     }
 
@@ -58,10 +79,10 @@ public class GameController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Keypad0))
         {
-            if (!developerMode)
-                EnableDeveloperMode();
-            else
+            if (developerMode)
                 DisableDeveloperMode();
+            else
+                EnableDeveloperMode();
         }
     }
 

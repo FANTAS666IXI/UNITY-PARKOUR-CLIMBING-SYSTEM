@@ -241,6 +241,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6d0f54cd2ba19b489f3bd9b4ec7611c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  developerMode: 0
+  defaultMaterial: {fileID: 2100000, guid: cc33bd0498239b145bcba61a81581b6f, type: 2}
+  developerMaterial: {fileID: 2100000, guid: 37befceced3e88543b4d28069c7b8d60, type: 2}
   classColor: {r: 0, g: 0.26666668, b: 0.8, a: 1}
   consoleLog: 1
   consoleLogSystem: 1
@@ -453,7 +456,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79a24e4ba0f9697428adc4dd19c55cd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  walkSpeed: 3
   runSpeed: 10
   rotationSpeed: 600
   classColor: {r: 0.8666667, g: 0, b: 0, a: 1}
@@ -953,7 +956,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: cc33bd0498239b145bcba61a81581b6f, type: 2}
+  - {fileID: 2100000, guid: b2d2bd127e8c2b74a83283aa23a5ba5d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -993,7 +996,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 1, z: 10}
+  m_LocalScale: {x: 50, y: 1, z: 50}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}

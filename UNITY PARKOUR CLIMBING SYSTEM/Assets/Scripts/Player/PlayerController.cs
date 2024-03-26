@@ -2,10 +2,12 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] float moveSpeed;
+    [SerializeField] float walkSpeed;
     [SerializeField] float runSpeed;
     [SerializeField] float rotationSpeed;
 
+    private float currentWalkSpeed;
+    private float currentRunSpeed;
     private float horizontalInput;
     private float verticalInput;
     private float moveAmount;
@@ -31,6 +33,17 @@ public class PlayerController : MonoBehaviour
         cameraController = Camera.main.GetComponent<CameraController>();
         animator = GetComponent<Animator>();
         gameController = FindObjectOfType<GameController>();
+    }
+
+    private void Start()
+    {
+        InitializeVariables();
+    }
+
+    private void InitializeVariables()
+    {
+        currentWalkSpeed = walkSpeed;
+        currentRunSpeed = runSpeed;
     }
 
     private void Update()
@@ -70,9 +83,9 @@ public class PlayerController : MonoBehaviour
     private void MovePlayer()
     {
         if (isRuning)
-            transform.position += runSpeed * Time.deltaTime * moveDir;
+            transform.position += currentRunSpeed * Time.deltaTime * moveDir;
         else
-            transform.position += moveSpeed * Time.deltaTime * moveDir;
+            transform.position += currentWalkSpeed * Time.deltaTime * moveDir;
         targetRotation = Quaternion.LookRotation(moveDir);
         ConsoleLog("Player Moves.");
     }
@@ -92,6 +105,26 @@ public class PlayerController : MonoBehaviour
                 moveAmount = Mathf.Clamp(moveAmount, 0, 0.2f);
         }
         animator.SetFloat("moveAmount", moveAmount, 0.2f, Time.deltaTime);
+    }
+
+    public float GetWalkSpeed()
+    {
+        return walkSpeed;
+    }
+
+    public float GetRunSpeed()
+    {
+        return runSpeed;
+    }
+
+    public void SetCurrentWalkSpeed(float walkSpeed)
+    {
+        currentWalkSpeed = walkSpeed;
+    }
+
+    public void SetCurrentRunSpeed(float runSpeed)
+    {
+        currentRunSpeed = runSpeed;
     }
 
     private void ConsoleLog(string message)
